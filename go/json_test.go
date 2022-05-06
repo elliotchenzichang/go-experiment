@@ -14,6 +14,15 @@ type Data struct {
 
 var int64Data = []Data{
 	{
+		Id: 1,
+	},
+	{
+		Id: 2,
+	},
+	{
+		Id: 3,
+	},
+	{
 		Id: 1 << 53,
 	},
 	{
