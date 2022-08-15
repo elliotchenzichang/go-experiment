@@ -25,7 +25,7 @@ func init() {
 // 准备测试需要的 500MB 数据
 func prepareDbData() {
 	defer db.Close()
-	for i := 0; i < 1000000; i++ {
+	for i := 0; i < 2000000; i++ {
 		err := db.Update(func(tx *nutsdb.Tx) error {
 			err := tx.Put(GetBucket(), GetKey(i), GetValue(), 0)
 			if err != nil {
