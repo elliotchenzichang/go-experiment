@@ -8,7 +8,7 @@ import (
 	"testing"
 )
 
-var path = "data/test_file.txt"
+var path = "test_file.txt"
 
 func TestPrepareData(t *testing.T) {
 	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
@@ -25,6 +25,8 @@ func TestPrepareData(t *testing.T) {
 }
 
 func BenchmarkFile_ReadAt(b *testing.B) {
+	b.ResetTimer()
+	b.ReportAllocs()
 	skipLength := 512
 	var index int64 = 0
 	file, err := os.OpenFile(path, os.O_RDWR, 0666)
@@ -42,7 +44,9 @@ func BenchmarkFile_ReadAt(b *testing.B) {
 }
 
 func BenchmarkFile_Read1(b *testing.B) {
-	skipLength := 50
+	b.ResetTimer()
+	b.ReportAllocs()
+	skipLength := 512
 	file, err := os.OpenFile(path, os.O_RDWR, 0666)
 	if err != nil {
 		panic(err)
