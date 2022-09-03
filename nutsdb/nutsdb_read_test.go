@@ -30,12 +30,12 @@ func BenchmarkConcurrentRead(b *testing.B) {
 	b.SetParallelism(10)
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
-			for j := 0; j < 10000; j++ {
-				db.View(func(tx *nutsdb.Tx) error {
-					tx.Get("test_bucket", GetKey(rand.Intn(100)))
-					return nil
-				})
-			}
+			db.View(func(tx *nutsdb.Tx) error {
+				for i := 0; i < 100; i++ {
+					tx.Get("test_bucket", GetKey(i))
+				}
+				return nil
+			})
 		}
 	})
 }
