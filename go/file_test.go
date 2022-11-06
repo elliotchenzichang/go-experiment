@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"io"
+	"math/rand"
 	"os"
 	"testing"
 )
@@ -62,4 +63,62 @@ func BenchmarkFile_Read1(b *testing.B) {
 			break
 		}
 	}
+}
+
+func TestRead(t *testing.T) {
+	fd, err := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	if err != nil {
+		t.Fatal(err)
+	}
+	data := []byte("aaaaaaaa")
+	write, err := fd.Write(data)
+	if err != nil {
+		return
+	}
+	if write != len(data) {
+		t.Fatal("write data length unexpected")
+	}
+
+	fd2, err := os.OpenFile("test.txt", os.O_RDWR, os.ModePerm)
+	readData := make([]byte, 4096)
+	read, err := fd2.Read(readData)
+	if err != nil {
+		t.Fatal(err)
+	}
+	fmt.Println(read)
+}
+
+func TestBufioReader(t *testing.T) {
+	fd, err := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	if err != nil {
+		t.Fatal(err)
+	}
+	dataSize := 5000
+	data := make([]byte, dataSize)
+	for i := 0; i < dataSize; i++ {
+		data[i] = byte(rand.Intn(100))
+	}
+	_, err = fd.Write(data)
+	if err != nil {
+		return
+	}
+
+	fd2, err := os.OpenFile("test.txt", os.O_RDWR, os.ModePerm)
+	if err != nil {
+		t.Fatal(err)
+	}
+	reader := bufio.NewReader(fd2)
+	block1 := make([]byte, 3000)
+	block2 := make([]byte, 2000)
+
+	read, err := reader.Read(block1)
+	if err != nil {
+		return
+	}
+	fmt.Println(read)
+	full, err := io.ReadFull(reader, block2)
+	if err != nil {
+		return
+	}
+	fmt.Println(full)
 }
