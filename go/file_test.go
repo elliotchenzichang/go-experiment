@@ -126,3 +126,15 @@ func TestBufioReader(t *testing.T) {
 	}
 	fmt.Println(full)
 }
+
+func TestBufio_ReadWriter(t *testing.T) {
+	readFd, _ := os.OpenFile("read.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	writerFd, _ := os.OpenFile("writer.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	reader := bufio.NewReader(readFd)
+	writer := bufio.NewWriter(writerFd)
+	rw := bufio.NewReadWriter(reader, writer)
+	r := make([]byte, 1024)
+	w := make([]byte, 1024)
+	rw.Read(r)
+	rw.Write(w)
+}
