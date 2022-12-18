@@ -1,4 +1,4 @@
-package _go
+package go_mysql
 
 import (
 	"github.com/go-mysql-org/go-mysql/replication"
