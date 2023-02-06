@@ -2,6 +2,7 @@ package _go
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
@@ -65,4 +66,26 @@ func TestJsonNumberWithGin(t *testing.T) {
 		c.JSON(http.StatusOK, int64Data)
 	})
 	r.Run(":9000")
+}
+
+func TestJsonMarshal(t *testing.T) {
+	type Student struct {
+		// 这里的首字母必须是大写，不然无法导出，也没办法marshal出来
+		//  这里的 json tag 可以自定义输出json字段的名字
+		Age  int    `json:"age"`
+		Name string `json:"name"`
+	}
+
+	var stu = &Student{
+		Age:  30,
+		Name: "Elliot",
+	}
+
+	bytes, err := json.Marshal(stu)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(string(bytes))
 }
