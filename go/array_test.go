@@ -84,3 +84,41 @@ func BenchmarkAppendPointer(b *testing.B) {
 		slice = append(slice, item)
 	}
 }
+
+func BenchmarkSlickGrow(b *testing.B) {
+	// 要测试的切片长度
+	var lengths = []int{1000, 10 * 1000, 100 * 1000, 1000 * 1000}
+	for _, length := range lengths {
+		// 直接申请空间的切片 性能测试
+		nameOfNotGrowBM := fmt.Sprintf("test_slice_not_grow_%d", length)
+		b.Run(nameOfNotGrowBM, func(b *testing.B) {
+			b.ReportAllocs()
+			b.StartTimer()
+			for i := 0; i < b.N; i++ {
+				value := 1
+				slice := make([]int, length)
+				for i := 0; i < length; i++ {
+					slice = append(slice, value)
+				}
+			}
+		})
+		// 从一开始就不申请空间，一路append的切片 性能测试
+		nameOfGrowBM := fmt.Sprintf("test_slice_grow_%d", length)
+		b.Run(nameOfGrowBM, func(b *testing.B) {
+			b.ReportAllocs()
+			b.StartTimer()
+			for i := 0; i < b.N; i++ {
+				value := 1
+				var slice []int
+				for i := 0; i < length; i++ {
+					slice = append(slice, value)
+				}
+			}
+		})
+	}
+}
+
+func TestSliceBaseUsage(t *testing.T) {
+	var slice []int
+	slice = append(slice, 1, 2, 3)
+}
