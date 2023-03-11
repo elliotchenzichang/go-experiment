@@ -6,7 +6,10 @@ import (
 	"io"
 	"math/rand"
 	"os"
+	"strings"
+	"sync"
 	"testing"
+	"time"
 )
 
 var path = "test_file.txt"
@@ -137,4 +140,185 @@ func TestBufio_ReadWriter(t *testing.T) {
 	w := make([]byte, 1024)
 	rw.Read(r)
 	rw.Write(w)
+}
+
+var task = func(numberOfGoroutines int, t *testing.T) {
+	f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	bytes := []byte(strings.Repeat("a", 4*1024))
+	rw := &sync.RWMutex{}
+	wg := &sync.WaitGroup{}
+	start := time.Now().UnixNano()
+	for i := 0; i < numberOfGoroutines; i++ {
+		writeTimes := 1024 / numberOfGoroutines
+		go func() {
+			wg.Add(1)
+			defer wg.Done()
+			for i := 0; i < writeTimes; i++ {
+				rw.Lock()
+				f.Write(bytes)
+				rw.Unlock()
+			}
+		}()
+	}
+	wg.Wait()
+	final := time.Now().UnixNano()
+	t.Logf("try number of goroutine: %d, and use time is %d", numberOfGoroutines, final-start)
+	os.Remove("test.txt")
+}
+
+func TestConcurrentReadByMultiGoroutine8(t *testing.T) {
+	task(8, t)
+}
+func TestConcurrentReadByMultiGoroutine16(t *testing.T) {
+	task(16, t)
+}
+func TestConcurrentReadByMultiGoroutine32(t *testing.T) {
+	task(32, t)
+}
+
+var taskOfChannelTest = func(numberOfGoroutines int, t *testing.T) {
+	wg := &sync.WaitGroup{}
+
+	bytes := []byte(strings.Repeat("a", 4*1024))
+	type param struct {
+		r     chan struct{}
+		bytes []byte
+	}
+	c := make(chan *param, 1)
+	f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	go func() {
+		for {
+			select {
+			case param := <-c:
+				f.Write(param.bytes)
+				param.r <- struct{}{}
+			}
+		}
+
+	}()
+	start := time.Now().UnixNano()
+	for i := 0; i < numberOfGoroutines; i++ {
+		writeTimes := 1024 / numberOfGoroutines
+		go func() {
+			wg.Add(1)
+			defer wg.Done()
+			r := make(chan struct{})
+			for i := 0; i < writeTimes; i++ {
+				p := &param{
+					r:     r,
+					bytes: bytes,
+				}
+				c <- p
+				select {
+				case <-p.r:
+
+				}
+			}
+		}()
+	}
+	wg.Wait()
+	final := time.Now().UnixNano()
+	t.Logf("try number of goroutine write via channel: %d, and use time is %d", numberOfGoroutines, final-start)
+	os.Remove("test.txt")
+}
+
+func TestWriteDataBySingleGoroutineViaChannel8(t *testing.T) {
+	taskOfChannelTest(8, t)
+}
+
+func TestWriteDataBySingleGoroutineViaChannel16(t *testing.T) {
+	taskOfChannelTest(16, t)
+}
+
+func TestWriteDataBySingleGoroutineViaChannel32(t *testing.T) {
+	taskOfChannelTest(32, t)
+}
+
+var taskOfChannelTestForBM = func(numberOfGoroutines int, t *testing.B) {
+	wg := &sync.WaitGroup{}
+
+	bytes := []byte(strings.Repeat("a", 4*1024))
+	type param struct {
+		r     chan struct{}
+		bytes []byte
+	}
+	c := make(chan *param, 1)
+	f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	go func() {
+		for {
+			select {
+			case param := <-c:
+				f.Write(param.bytes)
+				f.Sync()
+				param.r <- struct{}{}
+			}
+		}
+
+	}()
+	for i := 0; i < numberOfGoroutines; i++ {
+		writeTimes := 3
+		go func() {
+			wg.Add(1)
+			defer wg.Done()
+			r := make(chan struct{})
+			for i := 0; i < writeTimes; i++ {
+				p := &param{
+					r:     r,
+					bytes: bytes,
+				}
+				c <- p
+				select {
+				case <-p.r:
+
+				}
+			}
+		}()
+	}
+	wg.Wait()
+}
+
+func BenchmarkWriteDataBySingleGoroutineViaChannel(b *testing.B) {
+	for _, number := range []int{8, 16, 32} {
+		b.Run(fmt.Sprintf("test for %d goroutines", number), func(b *testing.B) {
+			b.StartTimer()
+			b.ReportAllocs()
+			for i := 0; i < b.N; i++ {
+				taskOfChannelTestForBM(number, b)
+			}
+		})
+	}
+}
+
+var taskForBM = func(numberOfGoroutines int, b *testing.B) {
+	f, _ := os.OpenFile("test.txt", os.O_CREATE|os.O_RDWR, os.ModePerm)
+	bytes := []byte(strings.Repeat("a", 4*1024))
+	rw := &sync.RWMutex{}
+	wg := &sync.WaitGroup{}
+	for i := 0; i < numberOfGoroutines; i++ {
+		writeTimes := 3
+		go func() {
+			wg.Add(1)
+			defer wg.Done()
+			for i := 0; i < writeTimes; i++ {
+				rw.Lock()
+				f.Write(bytes)
+				f.Sync()
+				rw.Unlock()
+			}
+		}()
+	}
+	wg.Wait()
+	os.Remove("test.txt")
+}
+
+func BenchmarkWriteDataByMultiGoroutines(b *testing.B) {
+	for _, number := range []int{8, 16, 32} {
+		b.Run(fmt.Sprintf("test for %d goroutines", number), func(b *testing.B) {
+			b.StartTimer()
+			b.ReportAllocs()
+			for i := 0; i < b.N; i++ {
+				taskForBM(number, b)
+			}
+		})
+	}
 }
