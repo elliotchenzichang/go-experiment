@@ -1,2 +1,2 @@
 # go-learn
-learning some thing of go
+这个仓库是我学习go的实践仓库，会包含大量的测试用例，大量的学习demo。
