@@ -15,17 +15,21 @@ import (
 var path = "test_file.txt"
 
 func TestPrepareData(t *testing.T) {
-	file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
-	if err != nil {
-		panic(err)
-	}
-	defer file.Close()
+	RunFileTest(t, func() (*os.File, error) {
+		file, err := os.OpenFile(path, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 0666)
+		return file, err
+	}, func(f *os.File) {
+		f.Close()
+		os.Remove(f.Name())
+	}, func(f *os.File) error {
+		write := bufio.NewWriter(f)
+		for i := 1; i <= 20000000; i++ {
+			write.WriteString(fmt.Sprint(i))
+		}
+		write.Flush()
+		return nil
+	})
 
-	write := bufio.NewWriter(file)
-	for i := 1; i <= 20000000; i++ {
-		write.WriteString(fmt.Sprint(i))
-	}
-	write.Flush()
 }
 
 func BenchmarkFile_ReadAt(b *testing.B) {
