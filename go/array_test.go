@@ -122,3 +122,26 @@ func TestSliceBaseUsage(t *testing.T) {
 	var slice []int
 	slice = append(slice, 1, 2, 3)
 }
+
+func BenchmarkTestMakeAndCopySlicePerformance(b *testing.B) {
+	testSliceSizeList := []int{100, 200, 1000, 2000}
+	for _, size := range testSliceSizeList {
+		b.Run(fmt.Sprintf("test performance of make slice which size is %d", size), func(b *testing.B) {
+			b.ResetTimer()
+			b.ReportAllocs()
+			for i := 0; i < b.N; i++ {
+				_ = make([]byte, size)
+			}
+		})
+	}
+
+	for _, size := range testSliceSizeList {
+		slice := make([]byte, 1000)
+		var target = make([]byte, 1000)
+		b.Run(fmt.Sprintf("test performance of copy slice which size is %d", size), func(b *testing.B) {
+			b.ResetTimer()
+			b.ReportAllocs()
+			copy(target, slice)
+		})
+	}
+}
