@@ -3,21 +3,23 @@ module go-learn
 go 1.18
 
 require (
+	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/boltdb/bolt v1.3.1
+	github.com/fzdwx/infinite v0.10.1
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-mysql-org/go-mysql v1.5.0
 	github.com/go-playground/assert/v2 v2.0.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/jmoiron/sqlx v1.3.5
+	github.com/nutsdb/nutsdb v0.12.2
 	github.com/siddontang/go v0.0.0-20180604090527-bdc77568d726
 	github.com/stretchr/testify v1.7.5
-	github.com/xujiajun/nutsdb v0.10.0
+	github.com/urfave/cli/v2 v2.25.0
 	github.com/xuri/excelize/v2 v2.6.1
 )
 
 require (
 	github.com/BurntSushi/toml v1.2.1 // indirect
-	github.com/DATA-DOG/go-sqlmock v1.5.0 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52 v1.2.1 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
@@ -28,7 +30,6 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/duke-git/lancet/v2 v2.1.13 // indirect
-	github.com/fzdwx/infinite v0.10.1 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
@@ -63,10 +64,9 @@ require (
 	github.com/siddontang/go-log v0.0.0-20190221022429-1e957dd83bed // indirect
 	github.com/stretchr/objx v0.4.0 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
-	github.com/urfave/cli/v2 v2.25.0 // indirect
 	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
 	github.com/xujiajun/mmap-go v1.0.1 // indirect
-	github.com/xujiajun/utils v0.0.0-20190123093513-8bf096c4f53b // indirect
+	github.com/xujiajun/utils v0.0.0-20220904132955-5f7c5b914235 // indirect
 	github.com/xuri/efp v0.0.0-20220603152613-6918739fd470 // indirect
 	github.com/xuri/nfp v0.0.0-20220409054826-5e722a1d9e22 // indirect
 	go.uber.org/atomic v1.7.0 // indirect
@@ -78,7 +78,6 @@ require (
 	golang.org/x/sys v0.4.0 // indirect
 	golang.org/x/term v0.4.0 // indirect
 	golang.org/x/text v0.6.0 // indirect
-	golang.org/x/tools v0.2.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect

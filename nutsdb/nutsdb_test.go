@@ -2,7 +2,7 @@ package nutsdb
 
 import (
 	"fmt"
-	"github.com/xujiajun/nutsdb"
+	"github.com/nutsdb/nutsdb"
 	"log"
 	"testing"
 )
@@ -99,4 +99,43 @@ func TestScan(t *testing.T) {
 	db.View(prefixSearchScanFunx)
 	db.View(rangeScanFunc)
 	db.View(getAllFunc)
+}
+
+func TestViewData(t *testing.T) {
+	db, err := nutsdb.Open(
+		nutsdb.DefaultOptions,
+		nutsdb.WithDir("/tmp/nutsdb"), // 数据库会自动创建这个目录文件
+	)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer func() { _ = db.Close() }()
+
+	// 把这段注释后, 就获取不到值了
+	//if err := db.Update(
+	//	func(tx *nutsdb.Tx) error {
+	//		key := []byte("name1")
+	//		val := []byte("val12")
+	//		bucket := "bucket1"
+	//		if err := tx.Put(bucket, key, val, 0); err != nil {
+	//			return err
+	//		}
+	//		return nil
+	//	}); err != nil {
+	//	log.Fatal(err)
+	//}
+
+	if err := db.View(
+		func(tx *nutsdb.Tx) error {
+			key := []byte("name1")
+			bucket := "bucket1"
+			if e, err := tx.Get(bucket, key); err != nil {
+				return err
+			} else {
+				fmt.Println(string(e.Value)) // "val1-modify"
+			}
+			return nil
+		}); err != nil {
+		log.Println(err)
+	}
 }
