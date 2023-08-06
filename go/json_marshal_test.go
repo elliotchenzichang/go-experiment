@@ -15,3 +15,20 @@ func TestSonic(t *testing.T) {
 	dec.Decode(&o)
 	fmt.Printf("%+v", o)
 }
+
+func TestSonic_MarshalType(t *testing.T) {
+	type Stu struct {
+		Name string
+		Age  int
+	}
+
+	var stuStr = `{"name":"Elliot", "age": 18}`
+	var stu *Stu
+	err := sonic.Unmarshal([]byte(stuStr), &stu)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	fmt.Printf("%+v\n", stu)
+
+}
