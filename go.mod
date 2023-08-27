@@ -5,12 +5,15 @@ go 1.18
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/boltdb/bolt v1.3.1
+	github.com/bytedance/sonic v1.9.2
+	github.com/dolthub/swiss v0.1.0
 	github.com/fzdwx/infinite v0.10.1
 	github.com/gin-gonic/gin v1.7.7
 	github.com/go-mysql-org/go-mysql v1.5.0
 	github.com/go-playground/assert/v2 v2.0.1
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/jmoiron/sqlx v1.3.5
+	github.com/mmcloughlin/avo v0.5.0
 	github.com/nutsdb/nutsdb v0.12.5
 	github.com/siddontang/go v0.0.0-20180604090527-bdc77568d726
 	github.com/stretchr/testify v1.8.3
@@ -24,7 +27,6 @@ require (
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52 v1.2.1 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
-	github.com/bytedance/sonic v1.9.2 // indirect
 	github.com/charmbracelet/bubbles v0.15.0 // indirect
 	github.com/charmbracelet/bubbletea v0.23.1 // indirect
 	github.com/charmbracelet/lipgloss v0.6.0 // indirect
@@ -33,7 +35,6 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dolthub/maphash v0.0.0-20221220182448-74e1e1ea1577 // indirect
-	github.com/dolthub/swiss v0.1.0 // indirect
 	github.com/duke-git/lancet/v2 v2.1.13 // indirect
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -89,14 +90,16 @@ require (
 	go.uber.org/atomic v1.9.0 // indirect
 	go.uber.org/multierr v1.6.0 // indirect
 	go.uber.org/zap v1.16.0 // indirect
-	golang.org/x/arch v0.0.0-20210923205945-b76863e36670 // indirect
-	golang.org/x/crypto v0.0.0-20220817201139-bc19a97f63c8 // indirect
+	golang.org/x/arch v0.1.0 // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 	golang.org/x/exp v0.0.0-20230202163644-54bba9f4231b // indirect
+	golang.org/x/mod v0.9.0 // indirect
 	golang.org/x/net v0.10.0 // indirect
 	golang.org/x/sys v0.10.0 // indirect
 	golang.org/x/term v0.8.0 // indirect
 	golang.org/x/text v0.9.0 // indirect
 	golang.org/x/time v0.3.0 // indirect
+	golang.org/x/tools v0.7.0 // indirect
 	google.golang.org/genproto v0.0.0-20230525154841-bd750badd5c6 // indirect
 	google.golang.org/grpc v1.55.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
