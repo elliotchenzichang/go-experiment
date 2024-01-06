@@ -96,7 +96,7 @@ func BenchmarkSlickGrow(b *testing.B) {
 			b.StartTimer()
 			for i := 0; i < b.N; i++ {
 				value := 1
-				slice := make([]int, length)
+				slice := make([]int, 0, length)
 				for i := 0; i < length; i++ {
 					slice = append(slice, value)
 				}
