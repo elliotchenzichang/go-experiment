@@ -16,14 +16,15 @@ require (
 	github.com/mmcloughlin/avo v0.5.0
 	github.com/nutsdb/nutsdb v0.12.5
 	github.com/siddontang/go v0.0.0-20180604090527-bdc77568d726
-	github.com/stretchr/testify v1.8.3
-	github.com/urfave/cli/v2 v2.25.0
+	github.com/stretchr/testify v1.8.4
+	github.com/urfave/cli/v2 v2.27.1
 	github.com/xuri/excelize/v2 v2.6.1
 	go.temporal.io/sdk v1.23.1
 )
 
 require (
-	github.com/BurntSushi/toml v1.2.1 // indirect
+	github.com/BurntSushi/toml v1.3.2 // indirect
+	github.com/IBM/fp-go v1.0.93 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52 v1.2.1 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
@@ -32,7 +33,7 @@ require (
 	github.com/charmbracelet/lipgloss v0.6.0 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
 	github.com/containerd/console v1.0.3 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.2 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/dolthub/maphash v0.0.0-20221220182448-74e1e1ea1577 // indirect
 	github.com/duke-git/lancet/v2 v2.1.13 // indirect
@@ -81,7 +82,7 @@ require (
 	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect
-	github.com/xrash/smetrics v0.0.0-20201216005158-039620a65673 // indirect
+	github.com/xrash/smetrics v0.0.0-20231213231151-1d8dd44e695e // indirect
 	github.com/xujiajun/mmap-go v1.0.1 // indirect
 	github.com/xujiajun/utils v0.0.0-20220904132955-5f7c5b914235 // indirect
 	github.com/xuri/efp v0.0.0-20220603152613-6918739fd470 // indirect
