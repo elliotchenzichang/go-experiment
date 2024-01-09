@@ -4,6 +4,7 @@ go 1.18
 
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
+	github.com/IBM/fp-go v1.0.93
 	github.com/boltdb/bolt v1.3.1
 	github.com/bytedance/sonic v1.9.2
 	github.com/dolthub/swiss v0.1.0
@@ -24,7 +25,6 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.3.2 // indirect
-	github.com/IBM/fp-go v1.0.93 // indirect
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52 v1.2.1 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
