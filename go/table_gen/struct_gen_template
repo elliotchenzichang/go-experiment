@@ -1,8 +1,0 @@
-package {{.PackageName}}
-
-
-type {{.StructName}} struct {
-	{{- range $i, $v := .Columns }}
-        {{$v.ColumnName}} {{$v.DataType}}
-      {{- end }}
-}
