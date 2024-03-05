@@ -9,6 +9,8 @@ require (
 	github.com/boltdb/bolt v1.3.1
 	github.com/bxcodec/faker/v3 v3.8.1
 	github.com/bytedance/sonic v1.9.2
+	github.com/chai2010/webp v1.1.1
+	github.com/disintegration/imaging v1.6.2
 	github.com/dolthub/swiss v0.1.0
 	github.com/fzdwx/infinite v0.10.1
 	github.com/gin-gonic/gin v1.7.7
@@ -35,7 +37,6 @@ require (
 	github.com/atotto/clipboard v0.1.4 // indirect
 	github.com/aymanbagabas/go-osc52 v1.2.1 // indirect
 	github.com/bwmarrin/snowflake v0.3.0 // indirect
-	github.com/chai2010/webp v1.1.1 // indirect
 	github.com/charmbracelet/bubbles v0.15.0 // indirect
 	github.com/charmbracelet/bubbletea v0.23.1 // indirect
 	github.com/charmbracelet/lipgloss v0.6.0 // indirect
@@ -43,7 +44,6 @@ require (
 	github.com/containerd/console v1.0.3 // indirect
 	github.com/cpuguy83/go-md2man/v2 v2.0.3 // indirect
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/disintegration/imaging v1.6.2 // indirect
 	github.com/dolthub/maphash v0.0.0-20221220182448-74e1e1ea1577 // indirect
 	github.com/duke-git/lancet/v2 v2.1.13 // indirect
 	github.com/facebookgo/clock v0.0.0-20150410010913-600d898af40a // indirect
@@ -120,7 +120,6 @@ require (
 	golang.org/x/time v0.3.0 // indirect
 	golang.org/x/tools v0.7.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/genproto v0.0.0-20231106174013-bbf56f31fb17 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20231106174013-bbf56f31fb17 // indirect
 	google.golang.org/grpc v1.61.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect
