@@ -4,10 +4,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/apache/arrow/go/v13/arrow"
 	"io"
 	"os"
 
+	"github.com/apache/arrow/go/v13/arrow"
 	"github.com/apache/arrow/go/v13/arrow/csv"
 )
 
