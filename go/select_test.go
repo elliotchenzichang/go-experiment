@@ -1,6 +1,8 @@
 package _go
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestSelectRandom(t *testing.T) {
 	var ch = make(chan int)
