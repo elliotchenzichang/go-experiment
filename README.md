@@ -1,2 +1,2 @@
 # go-learn
-这个仓库是我学习go的实践仓库，会包含大量的测试用例，大量的学习demo。
+this repo helps me to mark down all my test case and demo during I learning something
