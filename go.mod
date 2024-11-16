@@ -97,6 +97,7 @@ require (
 	github.com/sahilm/fuzzy v0.1.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/siddontang/go-log v0.0.0-20190221022429-1e957dd83bed // indirect
+	github.com/siddontang/go-mysql-elasticsearch v0.0.0-20200822025838-fe261969558b // indirect
 	github.com/stretchr/objx v0.5.0 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.1.7 // indirect

@@ -3,16 +3,16 @@ package main
 import (
 	"context"
 	"fmt"
+	proto "go-learn/grpc/protoc"
+	"google.golang.org/grpc/credentials/insecure"
 	"log"
 	"time"
-
-	proto "go-learn/grpc/protoc"
 
 	"google.golang.org/grpc"
 )
 
 func main() {
-	conn, err := grpc.NewClient("localhost:50051")
+	conn, err := grpc.NewClient("localhost:10084", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil {
 		log.Fatalf("did not connect: %v", err)
 	}

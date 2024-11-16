@@ -16,13 +16,14 @@ type server struct {
 }
 
 func (s *server) HelloWorld(ctx context.Context, req *proto.HelloRequest) (resp *proto.HelloReply, err error) {
+	ctx.Done()
 	return &proto.HelloReply{
-		Message: "hello" + req.Name,
+		Message: "hello, " + req.Name,
 	}, nil
 }
 
 func main() {
-	lis, err := net.Listen("tcp", "127.0.0.1:50051")
+	lis, err := net.Listen("tcp", "127.0.0.1:10084")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
